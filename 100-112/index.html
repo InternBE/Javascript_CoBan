@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs UI</title>
+    <style>
+        /* Định dạng cho Tabs */
+        .tabs {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: lightgray;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .tab.active {
+            background-color: lightblue;
+            font-weight: bold;
+        }
+
+        /* Ẩn các nội dung tab không được chọn */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tab active" data-tab="tab1">Tab 1</div>
+        <div class="tab" data-tab="tab2">Tab 2</div>
+        <div class="tab" data-tab="tab3">Tab 3</div>
+    </div>
+
+    <div class="tab-content active" id="tab1">
+        <h3>Nội dung Tab 1</h3>
+        <p>Đây là nội dung của Tab 1.</p>
+    </div>
+    <div class="tab-content" id="tab2">
+        <h3>Nội dung Tab 2</h3>
+        <p>Đây là nội dung của Tab 2.</p>
+    </div>
+    <div class="tab-content" id="tab3">
+        <h3>Nội dung Tab 3</h3>
+        <p>Đây là nội dung của Tab 3.</p>
+    </div>
+
+    <script>
+        // Lấy tất cả các tab và nội dung tab
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Hàm xử lý khi nhấn vào tab
+        function handleTabClick(event) {
+            // Xóa lớp 'active' của tất cả các tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Thêm lớp 'active' vào tab đang được chọn
+            const selectedTab = event.target;
+            selectedTab.classList.add('active');
+
+            // Ẩn tất cả các nội dung tab
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Hiển thị nội dung của tab đã chọn
+            const selectedTabContent = document.getElementById(selectedTab.dataset.tab);
+            selectedTabContent.classList.add('active');
+        }
+
+        // Gán sự kiện cho mỗi tab
+        tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+    </script>
+</body>
+</html>
